@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 # import jsonlines
 
-from typhoon_assignment.llm.llm import init_llm
+from typhoon_assignment.llm import init_llm
 from typhoon_assignment.llm.prompt import SYSTEM_PROMPT
 
 def gen_MCQ(
