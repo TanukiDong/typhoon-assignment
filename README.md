@@ -41,7 +41,7 @@ Scrape data from Foodpanda for Thai food recipes. The informaton includes :
 
 # Score
 MCQ1
-Chat performed 32/36 /n
+Chat performed 32/36 <br>
 MCQ1
 Chat performed 34/36
 
