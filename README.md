@@ -40,10 +40,10 @@ Scrape data from Foodpanda for Thai food recipes. The informaton includes :
 4. Given a step from the instruction, what dish does this step related to.
 
 # Score
-MCQ1
+**MCQ1** <br>
 Chat performed 32/36 <br>
-MCQ1
-Chat performed 34/36
+**MCQ1** <br>
+Chat performed 34/36 <br>
 
 # Issue / Remarks
 1. Accessing Web
