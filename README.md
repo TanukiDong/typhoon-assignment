@@ -41,9 +41,11 @@ Scrape data from Foodpanda for Thai food recipes. The informaton includes :
 
 # Score
 **MCQ1** <br>
-Chat performed 32/36 <br>
+ChatGPT performed 32/36 <br>
+Typhoon performed 26/36 <br> <br>
 **MCQ1** <br>
-Chat performed 34/36 <br>
+ChatGPT performed 34/36 <br>
+Typhoon performed 25/36 <br>
 
 # Issue / Remarks
 1. Accessing Web
