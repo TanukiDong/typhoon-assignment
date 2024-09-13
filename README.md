@@ -49,7 +49,7 @@ Typhoon performed 25/36 <br>
 
 # Issue / Remarks
 1. Accessing Web
-    * Can't access website with  requests.get(url).content <!-- Follow https://medium.com/@thunderguy/มาทำ-web-scraping-โดยใช้-beautifulsoup-กัน-56ae5dc3e2a2 -->
+    * Can't access website with  requests.get(url).content
     * The website is protected against bot
         * Use selenium to access webbrowser instead
     * Selenium access denied due to bot
