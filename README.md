@@ -1,6 +1,6 @@
 # typhoon-assignment-1
 
-Describe your project here.
+To run this project : Add typhoon API to .envrc
 
 ```bash
 .
@@ -49,14 +49,15 @@ Chat performed 34/36
 1. Accessing Web
     * Can't access website with  requests.get(url).content <!---Follow https://medium.com/@thunderguy/มาทำ-web-scraping-โดยใช้-beautifulsoup-กัน-56ae5dc3e2a2--->
     * The website is protected against bot
-    * Use selenium to access webbrowser instead
+        * Use selenium to access webbrowser instead
     * Selenium access denied due to bot
-    * Random 5-10 sleep time, random scrolling
+        * Random 5-10 sleep time, random scrolling
 2. Typo
     * The website got few typo 
         * eg. ผัดไทย → ไข่เป็ด 2 ฟอ''" , พริกป่น (ตามชอบ)ะ
     * Got to fix some dish name
         * สูตรผัดไทย → ผัดไทย
+        * This part is manual
 3. MCQ Generation
     * Result is not always in json format
     * Sometime questions are phrased ambiguously, leading to more than 1 possible answer
