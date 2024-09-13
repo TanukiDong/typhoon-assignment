@@ -2,25 +2,62 @@
 
 Describe your project here.
 
-web search
-* dish name
-* ingredients
-* tool
-* instruction
-** description
+```bash
+.
+├── README.md
+├── pyproject.toml
+├── requirements-dev.lock
+├── requirements.lock
+└── src
+    └── typhoon_assignment
+        ├── __init__.py
+        ├── data
+        │   ├── mcq1.jsonl              → First set of MCQ
+        │   ├── mcq2.jsonl              → Second set of MCQ
+        │   ├── recipe.json             → Fixed recipe data
+        │   ├── recipe_scrape.json      → Raw recipe data from website
+        │   └── thai_test_example.jsonl → Example format of MCQ
+        ├── grade.py                    → Check answer with GPT
+        ├── llm
+        │   ├── __init__.py             → Initialize Typhoon
+        │   └── prompt.py               → Prompt to generate MCQ
+        ├── mcq.py                      → Generate MCQ
+        ├── scrape.py                   → Scrape data from website
+        └── setting.py                  → Setting of this project
+```
 
-MCQ
-1. this dish use which ingredient
-2. How much ingredient for this dish
-2. this ingredient use for which dish
-3. this dish use which tool
-4. this tool use in what step of this dish
+# Web Search
+Scrape data from Foodpanda for Thai food recipes. The informaton includes : 
+* Dish name
+* Description
+* Ingredients
+* Instruction
 
+# MCQ
+1. Given description of a dish, what dish is it describing
+2. Given a dish, what ingredient is used to make this dish
+3. Given an ingredient, how much of it is needed to make a given dish
+4. Given a step from the instruction, what dish does this step related to.
 
-issue
-1. cant access website with  requests.get(url).content → Use selenium
-    1. Follow https://medium.com/@thunderguy/มาทำ-web-scraping-โดยใช้-beautifulsoup-กัน-56ae5dc3e2a2
-2. selenium access denied due to bot → random 5-10 sleep time, random scrolling
-3. website got typo (padthai ข่เป็ด 2 ฟอ''" พริกป่น (ตามชอบ)ะ)
-4. fix dish name from website
-5. few shot prompt (typhoon doc)
+# Score
+MCQ1
+Chat performed 32/36
+MCQ1
+Chat performed 34/36
+
+# Issue / Remarks
+1. Accessing Web
+    * Can't access website with  requests.get(url).content <!---Follow https://medium.com/@thunderguy/มาทำ-web-scraping-โดยใช้-beautifulsoup-กัน-56ae5dc3e2a2--->
+    * The website is protected against bot
+    * Use selenium to access webbrowser instead
+    * Selenium access denied due to bot
+    * Random 5-10 sleep time, random scrolling
+2. Typo
+    * The website got few typo 
+        * eg. ผัดไทย → ไข่เป็ด 2 ฟอ''" , พริกป่น (ตามชอบ)ะ
+    * Got to fix some dish name
+        * สูตรผัดไทย → ผัดไทย
+3. MCQ Generation
+    * Result is not always in json format
+    * Sometime questions are phrased ambiguously, leading to more than 1 possible answer
+    * Answers are somewhat random due to using llm and randomization in the algorithm
