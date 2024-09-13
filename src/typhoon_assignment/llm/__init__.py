@@ -4,19 +4,26 @@ from langchain_openai import ChatOpenAI
 from typhoon_assignment.setting import (
     API_KEY,
     MODEL,
-    BASE_URL,)
+    BASE_URL,
+    MAX_TOKENS,
+    # REPETITION_PENALTY,
+    )
 
-@cache
+# @cache
 def init_llm(
     base_url=BASE_URL,
     model=MODEL,
     api_key=API_KEY,
+    max_tokens=MAX_TOKENS,
+    # repetition_penalty=REPETITION_PENALTY,
 ):
 
     return ChatOpenAI(
         base_url=base_url,
         model=model,
-        api_key=api_key
+        api_key=api_key,
+        max_tokens=max_tokens,
+        # repetition_penalty=repetition_penalty,
     )
 
 if __name__ == "__main__":

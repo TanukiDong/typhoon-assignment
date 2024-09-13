@@ -1,6 +1,7 @@
 from langchain_core.messages import HumanMessage, SystemMessage
 from pathlib import Path
 import json
+import random
 # import jsonlines
 
 from typhoon_assignment.llm import init_llm
@@ -14,12 +15,15 @@ def gen_MCQ(
         ):
     # print(current_dish["dish_name"])
     dish_name = current_dish["dish_name"]
+    ingredient = random.choice(current_dish["ingredients"]).split(" ")[0]
+    description = current_dish["description"]
+    instruction = random.choice(current_dish["instructions"])
     questions = {
+        "description" : f"Summarize {description} in one sentence and ask what dish is it describing?",
         "ingredient": f"What ingredient does the dish {dish_name} use?",
-        "ingredient_amount": f"How much of an ingredient does the {dish_name} uses?",
-        "dish": f"Given an ingredient, what dish use this ingredient?",
-        "tool": f"What tool is required to make a {dish_name}?",
-        "tool_step": f"Select a random cooking step from {dish_name}'s instruction. What tool is used in this step?"
+        "ingredient_amount": f"How much of {ingredient} does {dish_name} uses? Use different unit of measure for each choice.",
+        # "dish": f"What dish use {ingredient} as its ingredient? Make sure the there is only 1 correct answer.",
+        "tool_step": f"Summarize {instruction} in one sentence and ask what dish is it related to?"
     }
 
     messages = [
@@ -27,11 +31,11 @@ def gen_MCQ(
         content=SYSTEM_PROMPT.format(data=data)
         ),
     HumanMessage(
-        content=f"Give me a multiple choice question about : {questions[question_type]}"
+        content=f"Generate a multiple choice question in json format in Thai language. Topic : {questions[question_type]}"
         )
     ]
     
-    result = llm.invoke(messages)
+    result = llm.invoke(messages).content
     return result
 
 
@@ -59,17 +63,16 @@ if __name__ == "__main__":
 
     q = []
     qtypes = [
+        "description",
         "ingredient",
         "ingredient_amount",
-        "dish",
-        "tool",
         "tool_step"
         ]
     
     for d in data:
         for t in qtypes:
             content = gen_MCQ(data, d, t)
-            print(content.content)
-            q.append(content.content)
+            print(content)
+            q.append(content)
 
-    # save_data(q)
+    save_data(q)

@@ -35,11 +35,12 @@ def scrape(url):
     
 
     recipe = {
-        'dish_name': '',
-        'ingredients': [],
-        'cooking_time': '',
-        'tools': [],
-        'instructions': []
+        "dish_name": "",
+        "description" : "",
+        "ingredients": [],
+        # 'cooking_time': '',
+        # 'tools': [],
+        "instructions": []
     }
     recipe_section = soup.find('div', id='recipes')
 
@@ -47,12 +48,15 @@ def scrape(url):
     dish_name_section = soup.find('h1')
     recipe['dish_name'] = dish_name_section.text.strip() if dish_name_section else ''
 
-    # Cooking Time
-    cooking_time_section = recipe_section.find('strong', string='ระยะเวลาทำอาหาร')
-    cooking_time_data = cooking_time_section.find_next('time') if cooking_time_section else None
-    recipe['cooking_time'] = cooking_time_data.text.strip() if cooking_time_data else ''
+    # Description
+    description_section = recipe_section.find('span')
+    recipe['description'] = description_section.text.strip() if description_section else ''
 
-    
+    # # Cooking Time
+    # cooking_time_section = recipe_section.find('strong', string='ระยะเวลาทำอาหาร')
+    # cooking_time_data = cooking_time_section.find_next('time') if cooking_time_section else None
+    # recipe['cooking_time'] = cooking_time_data.text.strip() if cooking_time_data else ''
+
     # Ingredient
     ingredients_section = recipe_section.find('h2', string='วัตถุดิบ')
     ingredients_list = ingredients_section.find_next('ul') if ingredients_section else None
@@ -60,9 +64,9 @@ def scrape(url):
 
     
     # Tool
-    tools_section = recipe_section.find('h2', string='อุปกรณ์ที่ใช้ในการประกอบอาหาร')
-    tools_list = tools_section.find_next('ul') if tools_section else None
-    recipe['tools'] = [li.text.strip() for li in tools_list.find_all('li')] if tools_list else []
+    # tools_section = recipe_section.find('h2', string='อุปกรณ์ที่ใช้ในการประกอบอาหาร')
+    # tools_list = tools_section.find_next('ul') if tools_section else None
+    # recipe['tools'] = [li.text.strip() for li in tools_list.find_all('li')] if tools_list else []
 
     
     # Instruction
@@ -79,7 +83,7 @@ if __name__ == "__main__":
         "https://www.foodpanda.co.th/contents/thai-basil-pork-recipe", # ผัดกะเพราหมู
         "https://www.foodpanda.co.th/contents/tom-yum-goong-recipe", # ต้มยำกุ้ง
         "https://www.foodpanda.co.th/contents/tom-kha-gai-recipe", # ต้มข่าไก่
-        "https://www.foodpanda.co.th/contents/green-papaya-salad-recipe", # ส้มตำเขียว 
+        "https://www.foodpanda.co.th/contents/green-papaya-salad-recipe", # ส้มตำ
         "https://www.foodpanda.co.th/contents/gaeng-kiaw-wan-recipe", # แกงเขียวหวาน
         "https://www.foodpanda.co.th/contents/drunken-noodles-recipe", # ผัดขี้เมา
         "https://www.foodpanda.co.th/contents/crying-tiger-recipe", # เสือร้องไห้
@@ -97,6 +101,6 @@ if __name__ == "__main__":
     for content in db:
         print(json.dumps(content, ensure_ascii=False, indent=4))
 
-    DATA_DIR = Path(__file__).parent.parent / "data/recipe_scrape.json"
+    DATA_DIR = Path(__file__).parent / "data/recipe_scrape.json"
     with open(DATA_DIR, 'w', encoding='utf-8') as f:
         json.dump(db, f, ensure_ascii=False, indent=4)
